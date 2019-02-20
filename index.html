@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/d3js/5.7.0/d3.min.js"></script>
+
     <title>Trivia Game</title>
 </head>
 <body>
@@ -16,98 +18,195 @@
 <div id="main">
     <h2>Time Remaing: <span id="countDown">0</span> Seconds</h2>
     <div id="results">
-    <p id="here">Here are you results:
+    <p id="here">Here are your results:
         <h3># Correct Answers: <span id="correct">0</span></h3>
         <h3># Incorrect Answers: <span id="incorrect">0</span></h3>
         <h3># Incomplete: <span id="incomplete">0</span></h3>
     </p>
-        </div>
-    <form id= "game">
-
+    </div>
+   
+    <form id="game">
     <div class = "question">
         <h3>What is the state dessert of Arizona?</h3>
-            <input type="radio" name="q1" value="Lane Cake"> Lane Cake
-            <input type="radio" name="q1" value="Layer Cake"> Layer Cake
-            <input type="radio" name="q1" value="Yuka Pie"> Yuka Pie
-            <input type="radio" name="q1" value="Cactus Pear Sorbet"> Cactus Pear Sorbet
- 
-
-        </div>
+            <input type="radio" name="q1" id="q1" value="Lane Cake"> Lane Cake
+            <input type="radio" name="q1" id="q1" value="Layer Cake"> Layer Cake
+            <input type="radio" name="q1" id="q1" value="Yuka Pie"> Yuka Pie
+            <input type="radio" name="q1" id="q1" value="Cactus Pear Sorbet"> Cactus Pear Sorbet
+    </div>
 
         <div class = "question">
             <h3>Name the state which is the birthplace of the Cheeseburger?</h3>
-                <input type="radio" name="q2" value="CO"> Colorado
-                <input type="radio" name="q2" value="NJ"> New Jersey
-                <input type="radio" name="q2" value="TX"> Texas
-                <input type="radio" name="q2" value="WI"> Wisconsin
+               
+                <input type="radio" name="q2" id="q2" value="NJ"> New Jersey
+                <input type="radio" name="q2" id="q2" value="TX"> Texas
+                <input type="radio" name="q2" id="q2" value="WI"> Wisconsin
+                <input type="radio" name="q2" id="q2" value="CO"> Colorado
  
             </div>
         
             <div class = "question">
                 <h3>What is an Indian dish, but is the national dish of England?</h3>
-                    <input type="radio" name="q3" value="a1"> Chicken Tikka Masala
-                    <input type="radio" name="q3" value="a2"> Biryani
-                    <input type="radio" name="q3" value="a3"> Tandoori Chicken
-                    <input type="radio" name="q3" value="a4"> Panipuri
+                    <input type="radio" name="q3" id="q3" value="Chicken Tikka Masala"> Chicken Tikka Masala
+                    <input type="radio" name="q3" id="q3" value="Biryani"> Biryani
+                    <input type="radio" name="q3" id="q3" value="Tandoori Chicken"> Tandoori Chicken
+                    <input type="radio" name="q3" id="q3" value="Panipuri"> Panipuri
  
                 </div>
                 
                 <div class = "question">
                     <h3>Which soft-drink originated in North-Carolina?</h3>
-                        <input type="radio" name="q4" value="Pepsi-Cola"> Pepsi-Cola
-                        <input type="radio" name="q4" value="Sprite"> Sprite
-                        <input type="radio" name="q4" value="Dr Pepper"> Dr Pepper
-                        <input type="radio" name="q4" value="Root Beer"> Root Beer
+                       
+                        <input type="radio" name="q4" id="q4" value="Sprite"> Sprite
+                        <input type="radio" name="q4" id="q4" value="Dr Pepper"> Dr Pepper
+                        <input type="radio" name="q4" id="q4" value="Pepsi-Cola"> Pepsi-Cola
+                        <input type="radio" name="q4" id="q4" value="Root Beer"> Root Beer
  
                         </div>
 
                     <div class = "question">
                         <h3>What is the state vegetable of Oklahoma?</h3>
-                            <input type="radio" name="q5" value="Watermelon"> Watermelon
-                            <input type="radio" name="q5" value="Vidalia Onion"> Vidalia Onion
-                            <input type="radio" name="q5" value="Asparagus"> Asparagus
-                            <input type="radio" name="q5" value="Turnips"> Turnips
+                            
+                            <input type="radio" name="q5" id="q5" value="Vidalia Onion"> Vidalia Onion
+                            <input type="radio" name="q5" id="q5" value="Watermelon"> Watermelon
+                            <input type="radio" name="q5" id="q5" value="Asparagus"> Asparagus
+                            <input type="radio" name="q5" id="q5" value="Turnips"> Turnips
                         </div>
-    </form>
+        <button id="end">Submit</button>
+        </form>
     </div>
     
     <script type ="text/javascript">
+
+           
         // Hide questions until start button is pressed
         $('#main').hide();
         $('#start').on('click',function(){
             $('#main').show();
             $('#start').hide();
+        //Hide #results until timer stops, show #results when timer stops
+          //  $('#results').hide();
+
         });
 
-        
-
         // Establish timer
-        var countDownDate = today();
-        var x = setInterval(function(){
-            var now = new Date().getTime();
-            console.log(now);
-            var distance = countDownDate - now;
-            console.log(distance);
-            var seconds = Math.floor(((1000 * 60))/1000);
-        console.log(seconds);
-        })
 
-   
 
-        for (var seconds; seconds<91; seconds++){
-         $('#countDown').text(seconds);
-       }
+        function startTime () {
+            var x= new Date().getSeconds();
+           console.log(x);
 
-        //Hide #results until timer stops, show #results when timer stops
-        $('#results').hide();
+        }
       
         //Freeze #game when timer stops
 
         //Check questions for result
+    
+            $('#end').on('click',function(){
+            $('#game').hide();
+            $('#results').show();
+           
 
-        //Display #correct & #incorrect answer results
-    </script>
+        });
+            
+            // correct count
+            var correctAns = [];
+            // incorrect function
 
+            // incorrect count
+            var incorrectAns = [];
+
+            // Set Answer Key
+            var q1Ans = "Lane Cake"
+            var q2Ans = "CO"
+            var q3Ans = "Chicken Tikka Masala"
+            var q4Ans = "Pepsi-Cola"
+            var q5Ans = "Watermelon"
+
+           
+            // Add user inputs to below variables
+            
+            var input1 = ""
+            var input2 = ""
+            var input3 = ""
+            var input4 = ""
+            var input5 = ""
+
+            // Capture user inputs for each question and compare to Answer Key
+        
+            $('#end').on('click',function(){
+                var q1Input =  $('#q1:checked').val();
+                input1 = q1Input;
+                // if correct, then add answer value to correctAns array
+                if (input1==q1Ans) {
+                    correctAns.push(input1,);
+                } 
+                 // if incorrect, then add answer value to incorrectAns array
+                else {
+                    incorrectAns.push(input1,);
+                };
+                //console.log(input1); 
+                console.log("Correct:" + correctAns);
+                console.log("Incorrect:" + incorrectAns);
+            
+            var q2Input = $('#q2:checked').val();
+                input2 = q2Input;
+                if (input2==q2Ans) {
+                    correctAns.push(input2,);
+                } 
+                else {
+                    incorrectAns.push(input2,);
+                };
+                //console.log(input2); 
+                console.log("Correct:" + correctAns);
+                console.log("Incorrect:" + incorrectAns);
+
+            var q3Input = $('#q3:checked').val();
+                input3 = q3Input;
+                if (input3==q3Ans) {
+                    correctAns.push(input3,);
+                } 
+                else {
+                    incorrectAns.push(input3,);
+                };
+                //console.log(input3); 
+                console.log("Correct:" + correctAns);
+                console.log("Incorrect:" + incorrectAns);
+            
+            var q4Input = $('#q4:checked').val();
+                input4 = q4Input;
+                if (input4==q4Ans) {
+                    correctAns.push(input4,);
+                } 
+                else {
+                    incorrectAns.push(input4,);
+                };
+                //console.log(input4); 
+                console.log("Correct:" + correctAns);
+                console.log("Incorrect:" + incorrectAns);
+
+            var q5Input = $('#q5:checked').val();
+                input5 = q5Input;
+                if (input5==q5Ans) {
+                    correctAns.push(input5);
+                } 
+                else {
+                    incorrectAns.push(input5);
+                };
+                alert(input5); 
+                console.log("Correct:" + correctAns);
+                console.log("Incorrect:" + incorrectAns);
+               
+            // Count number of correct answers  
+                var c = correctAns.length;
+                alert('# of Correct Answers:'+ c);
+             
+            // Count number of incorrect answers    
+                var i = incorrectAns.length;
+                alert('# of Incorrect Answers:'+ i);
+            
+            });
+        
+   </script>
 
 </body>
 </html>

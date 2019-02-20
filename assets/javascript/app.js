@@ -12,6 +12,7 @@
  })
 
  // Establish timer
+ // ***** HAVING A PROBLEM CREATING THE TIMER *** //
 
  function startTime () {
      var x= new Date().getSeconds();
@@ -28,6 +29,8 @@
     // incorrect count
      var incorrectAns = [];
 
+    // incomplete count
+     var incompleteAns = [];
 
      // Set Answer Key
      var q1Ans = "Lane Cake"
@@ -52,15 +55,16 @@
       //  Show results and hide the questions
        $('#game').hide();
        $('#main').show();
-       $("#game").submit(function(e) {
-        e.preventDefault();
-    })
+   
     // Begin checking answers 
 
     var q1Input =  $('#q1:checked').val();
          input1 = q1Input;
          // if correct, then add answer value to correctAns array
-         if (input1==q1Ans) {
+         if (input1==null) {
+            incompleteAns.push(1);
+         }
+         else if (input1==q1Ans) {
              correctAns.push(input1,);
          } 
           // if incorrect, then add answer value to incorrectAns array
@@ -73,7 +77,10 @@
      
      var q2Input = $('#q2:checked').val();
          input2 = q2Input;
-         if (input2==q2Ans) {
+         if (input2==null) {
+            incompleteAns.push(1);
+         }
+         else if (input2==q2Ans) {
              correctAns.push(input2,);
          } 
          else {
@@ -85,7 +92,10 @@
 
      var q3Input = $('#q3:checked').val();
          input3 = q3Input;
-         if (input3==q3Ans) {
+         if (input3==null) {
+            incompleteAns.push(1);
+         }
+         else if (input3==q3Ans) {
              correctAns.push(input3,);
          } 
          else {
@@ -97,7 +107,10 @@
      
      var q4Input = $('#q4:checked').val();
          input4 = q4Input;
-         if (input4==q4Ans) {
+         if (input4==null) {
+            incompleteAns.push(1);
+         }
+         else if (input4==q4Ans) {
              correctAns.push(input4,);
          } 
          else {
@@ -109,7 +122,10 @@
 
      var q5Input = $('#q5:checked').val();
          input5 = q5Input;
-         if (input5==q5Ans) {
+         if (input5==null) {
+            incompleteAns.push(1);
+         }
+         else if (input5==q5Ans) {
              correctAns.push(input5);
          } 
          else {
@@ -129,5 +145,16 @@
          var i = incorrectAns.length;
          alert('# of Incorrect Answers:'+ i);
          $('#incorrect').text(i);
-    
-        });
+
+     // Count number of incomplete answers
+        var i = incompleteAns.length;
+        alert('# of Incomplete Answers:'+ i);
+        $('#incomplete').text(i);
+       
+    // Prevent form from refreshing, but reconsider approach 
+    // by possibly removing the form
+        $("#game").submit(function(e) {
+            e.preventDefault();
+        })
+
+ });

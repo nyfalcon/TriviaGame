@@ -1,15 +1,17 @@
- // Hide questions until start button is pressed
- $('#main').hide();
- $('#start').on('click',function(){
-     $('#main').show();
-     $('#start').hide();
- //Hide #results until timer stops, show #results when timer stops
-   //  $('#results').hide();
+// ***** Food Trivia Game Javascript ****** //
 
- });
+// Hide questions until start button is pressed
+ $('#game').hide();
+ //Hide #results until timer stops, show #results when timer stops
+ $('#main').hide();
+ // Establish start button
+ $('#start').on('click',function(){
+     $('#game').show();
+     $('#start').hide();
+  
+ })
 
  // Establish timer
-
 
  function startTime () {
      var x= new Date().getSeconds();
@@ -19,21 +21,13 @@
 
  //Freeze #game when timer stops
 
- //Check questions for result
-
-     $('#end').on('click',function(){
-     $('#game').hide();
-     $('#results').show();
-    
-
- });
      
      // correct count
      var correctAns = [];
-     // incorrect function
-
-     // incorrect count
+   
+    // incorrect count
      var incorrectAns = [];
+
 
      // Set Answer Key
      var q1Ans = "Lane Cake"
@@ -52,9 +46,18 @@
      var input5 = ""
 
      // Capture user inputs for each question and compare to Answer Key
- 
-     $('#end').on('click',function(){
-         var q1Input =  $('#q1:checked').val();
+        
+     
+    $('#end').on('click',function(){
+      //  Show results and hide the questions
+       $('#game').hide();
+       $('#main').show();
+       $("#game").submit(function(e) {
+        e.preventDefault();
+    })
+    // Begin checking answers 
+
+    var q1Input =  $('#q1:checked').val();
          input1 = q1Input;
          // if correct, then add answer value to correctAns array
          if (input1==q1Ans) {
@@ -112,18 +115,19 @@
          else {
              incorrectAns.push(input5);
          };
-         alert(input5); 
+         console.log(input5); 
          console.log("Correct:" + correctAns);
          console.log("Incorrect:" + incorrectAns);
         
      // Count number of correct answers  
          var c = correctAns.length;
          alert('# of Correct Answers:'+ c);
+         $('#correct').text(c);
+         
       
      // Count number of incorrect answers    
          var i = incorrectAns.length;
          alert('# of Incorrect Answers:'+ i);
-     
-     });
- 
-        
+         $('#incorrect').text(i);
+    
+        });

@@ -2,8 +2,9 @@
 
 
 #headPic {
-    width: 100%;
+    width: 80%;
     height: 250px;
+  
 }
 body {
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -24,6 +25,7 @@ h2 {
 }
 
 #start {
+        float: left;
   
         background-color:#77b55a;
         -moz-border-radius:28px;
